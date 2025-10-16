@@ -1,18 +1,36 @@
-# Ensure Apache serves built assets with the correct MIME types when deploying to cPanel.
-AddType text/html                 .html .htm
-AddType text/css                  .css
-AddType text/javascript           .js .mjs
-AddType application/json          .json
-AddType application/manifest+json .webmanifest .manifest
-AddType text/plain                .txt
-AddType image/svg+xml             .svg
-AddType image/png                 .png
-AddType image/jpeg                .jpg .jpeg
-AddType image/webp                .webp
-AddType image/avif                .avif
-AddType image/x-icon              .ico
-AddType font/woff2                .woff2
-AddType font/woff                 .woff
-AddType font/ttf                  .ttf
-AddType font/otf                  .otf
-AddType application/wasm          .wasm
+# Enforce the correct MIME types for every asset that ships with the Vite build
+# when uploading the contents of the dist/ directory to a cPanel host.
+<IfModule mod_mime.c>
+  # Reset any inherited defaults so the new mappings always win.
+  RemoveType .js .mjs .cjs .jsx .ts .tsx
+  RemoveType .css .json .webmanifest .manifest .svg .png .jpg .jpeg .webp .avif .ico
+  RemoveType .woff2 .woff .ttf .otf .wasm
+
+  AddType text/html                 .html .htm
+  AddType text/css                  .css
+  AddType text/javascript           .js .mjs .cjs .jsx
+  AddType application/json          .json
+  AddType application/manifest+json .webmanifest .manifest
+  AddType text/plain                .txt
+  AddType image/svg+xml             .svg
+  AddType image/png                 .png
+  AddType image/jpeg                .jpg .jpeg
+  AddType image/webp                .webp
+  AddType image/avif                .avif
+  AddType image/x-icon              .ico
+  AddType font/woff2                .woff2
+  AddType font/woff                 .woff
+  AddType font/ttf                  .ttf
+  AddType font/otf                  .otf
+  AddType application/wasm          .wasm
+</IfModule>
+
+# As a final safety net, make sure JavaScript is never delivered as application/octet-stream.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|mjs|cjs|jsx)$">
+    Header set Content-Type "text/javascript; charset=UTF-8"
+  </FilesMatch>
+</IfModule>
+
+# Default to UTF-8 for all text assets to avoid garbled characters.
+AddDefaultCharset UTF-8
