@@ -1,7 +1,7 @@
 # Ensure Apache serves built assets with the correct MIME types when deploying to cPanel.
 AddType text/html                 .html .htm
 AddType text/css                  .css
-AddType application/javascript    .js .mjs
+AddType text/javascript           .js .mjs
 AddType application/json          .json
 AddType application/manifest+json .webmanifest .manifest
 AddType text/plain                .txt

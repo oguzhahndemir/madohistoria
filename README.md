@@ -34,7 +34,7 @@ Uploading the contents of the `dist` folder to an Apache-based cPanel host works
 | --- | --- |
 | `.html`, `.htm` | `text/html` |
 | `.css` | `text/css` |
-| `.js`, `.mjs` | `application/javascript` |
+| `.js`, `.mjs` | `text/javascript` |
 | `.json` | `application/json` |
 | `.webmanifest`, `.manifest` | `application/manifest+json` |
 | `.txt` | `text/plain` |
@@ -49,5 +49,7 @@ Uploading the contents of the `dist` folder to an Apache-based cPanel host works
 | `.ttf` | `font/ttf` |
 | `.otf` | `font/otf` |
 | `.wasm` | `application/wasm` |
+
+> **Note:** Some shared hosting environments default to `application/octet-stream` for `.js` files. Explicitly mapping them to `text/javascript` ensures browsers will execute the bundled module scripts instead of blocking them for having the wrong MIME type.
 
 If your hosting provider blocks custom `.htaccess` files, configure the same MIME mappings through the cPanel **MIME Types** interface instead.
