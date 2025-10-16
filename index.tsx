@@ -6,8 +6,10 @@ import { AppProvider } from './contexts/AppContext';
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    // FIX: Corrected property access for service worker registration.
-    navigator.serviceWorker.register('/service-worker.js')
+    const baseUrl = (import.meta.env.BASE_URL ?? '/').replace(/\/*$/, '/');
+    const serviceWorkerUrl = `${baseUrl}service-worker.js`;
+
+    navigator.serviceWorker.register(serviceWorkerUrl)
       .then(registration => {
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
       })
