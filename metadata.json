@@ -1,0 +1,5 @@
+{
+  "name": "MADO Interactive Digital Experience",
+  "description": "An AI-powered, interactive kiosk and QR menu for MADO, featuring weather-based recommendations, multi-platform support, sensory feedback, and an advanced admin panel concept.",
+  "requestFramePermissions": []
+}

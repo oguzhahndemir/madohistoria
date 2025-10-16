@@ -1,0 +1,16 @@
+{
+  "short_name": "MADO Menu",
+  "name": "MADO Interactive Digital Experience",
+  "icons": [
+    {
+      "src": "https://madohistoria.bisce.com.tr/mado-logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "#1a202c",
+  "background_color": "#000000"
+}
